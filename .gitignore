@@ -1,5 +1,7 @@
 # Project exclude paths
 /.gradle/
+/.idea/
+/build/
 /pf4j-demo/api/build/
 /pf4j-demo/app/build/
 /pf4j-demo/build/
