@@ -1,0 +1,14 @@
+# Project exclude paths
+/.gradle/
+/pf4j-demo/api/build/
+/pf4j-demo/app/build/
+/pf4j-demo/build/
+/pf4j-demo/plugins/build/
+/pf4j-demo/plugins/hello/build/
+/plugin-demo/app/build/
+/plugin-demo/build/
+/plugin-demo/plugins/build/
+/plugin-demo/plugins/hello/build/
+/plugin-framework/build/
+/plugin-framework/build/classes/java/main/
+/spi-kotlin/build/
