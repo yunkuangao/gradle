@@ -1,5 +1,4 @@
 import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val ktorVersion = "1.6.7"
@@ -31,8 +30,8 @@ repositories {
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    implementation("org.seleniumhq.selenium", "selenium-java", "latest.release")
-    implementation("io.github.bonigarcia", "webdrivermanager", "latest.release")
+    implementation("org.seleniumhq.selenium", "selenium-java", "4.1.1")
+    implementation("io.github.bonigarcia", "webdrivermanager", "5.0.3")
     implementation("io.ktor", "ktor-client-core", ktorVersion)
     implementation("io.ktor", "ktor-client-cio", ktorVersion)
     implementation("io.github.microutils", "kotlin-logging", logVersion)
