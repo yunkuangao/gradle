@@ -14,3 +14,5 @@
 /plugin-framework/build/
 /plugin-framework/build/classes/java/main/
 /spi-kotlin/build/
+/chevereto-desktop-kotlin/build/
+/editor-kotlin/build/
