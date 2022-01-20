@@ -1,7 +1,8 @@
 package parse
 
-import constant.cheveretoPath
+import constant.cacheFileList
 import constant.musicDirector
+import constant.sep
 import handler.chrome
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -24,6 +25,12 @@ class CheveretoParse(
     private val driver: WebDriver = chrome(),
 ) {
 
+    private val client = HttpClient {
+        install(HttpTimeout) {
+            requestTimeoutMillis = 30 * 1000
+        }
+    }
+
     private val logger = KotlinLogging.logger {}
 
     fun categorys(): List<CacheInfo> {
@@ -36,7 +43,7 @@ class CheveretoParse(
 
     fun download(): Boolean {
         return try {
-            images().run { logger.info("下载成功") }
+            images().run { logger.info("chevereto download finish") }
             true
         } catch (e: Exception) {
             logger.error(e.message)
@@ -79,31 +86,46 @@ class CheveretoParse(
     }
 
     private fun saveImage(images: List<CacheInfo>) {
-        images.map {
-            runBlocking {
-                val client = HttpClient {
-                    install(HttpTimeout) {
-                        requestTimeoutMillis = 30 * 1000
-                    }
-                }
-                try {
-                    val httpResponse: HttpResponse = retryIO(times = 3) {
-                        client.get(it.url) {
-                            onDownload { bytesSentTotal, contentLength ->
-                                logger.debug("Received $bytesSentTotal bytes from $contentLength")
+        images.forEach {
+            val filePath = musicDirector() + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
+
+            if (!cacheFiles.contains(it.name)) {
+                runBlocking {
+                    try {
+                        val httpResponse: HttpResponse = retryIO(times = 3) {
+                            client.get(it.url) {
+                                onDownload { bytesSentTotal, contentLength ->
+                                    logger.debug("Received $bytesSentTotal bytes from $contentLength")
+                                }
                             }
                         }
+
+                        writeFile(filePath, httpResponse.receive()).run { logger.info("A file ${it.name} saved to $filePath") }
+
+                    } catch (e: Exception) {
+                        logger.error(e.message)
+                        logger.debug { e.printStackTrace() }
                     }
-
-                    val filePath = musicDirector() + File.separator + cheveretoPath + File.separator + it.parent + File.separator + it.url.substring(it.url.lastIndexOf("/"))
-                    writeFile(filePath, httpResponse.receive()).run { logger.info("A file saved to $filePath") }
-
-                } catch (e: Exception) {
-                    logger.error(e.message)
-                    logger.debug { e.printStackTrace() }
                 }
+            } else {
+                logger.debug("file ${it.name} was saved to $filePath")
             }
         }
     }
+
+    companion object {
+        const val cheveretoPath = "chevereto"
+
+        private lateinit var cacheFiles: List<String>
+
+        init {
+            updateCacheFiles()
+        }
+
+        fun updateCacheFiles() {
+            cacheFiles = cacheFileList(musicDirector() + sep + cheveretoPath, mutableListOf())
+        }
+    }
+
 }
 
