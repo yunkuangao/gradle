@@ -6,7 +6,7 @@ import constant.sep
 import handler.chrome
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.features.*
+import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
@@ -18,7 +18,6 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import util.retryIO
 import util.writeFile
-import java.io.File
 
 class CheveretoParse(
     private val cheveretoInfo: CheveretoInfo,
@@ -100,7 +99,7 @@ class CheveretoParse(
                             }
                         }
 
-                        writeFile(filePath, httpResponse.receive()).run { logger.info("A file ${it.name} saved to $filePath") }
+                        writeFile(filePath, httpResponse.body()).run { logger.info("A file ${it.name} saved to $filePath") }
 
                     } catch (e: Exception) {
                         logger.error(e.message)
