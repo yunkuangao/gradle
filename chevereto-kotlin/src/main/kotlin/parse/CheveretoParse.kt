@@ -6,7 +6,7 @@ import constant.sep
 import handler.chrome
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.plugins.*
+import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
@@ -99,7 +99,7 @@ class CheveretoParse(
                             }
                         }
 
-                        writeFile(filePath, httpResponse.body()).run { logger.info("A file ${it.name} saved to $filePath") }
+                        writeFile(filePath, httpResponse.receive()).run { logger.info("A file ${it.name} saved to $filePath") }
 
                     } catch (e: Exception) {
                         logger.error(e.message)

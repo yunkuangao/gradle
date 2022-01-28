@@ -1,4 +1,3 @@
-val pf4jVersion: String by project
 val pluginsDir: File by project.parent!!.extra
 val appMainClass = "com.yunkuangao.BootKt"
 
@@ -10,11 +9,11 @@ plugins {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":pf4j-demo:api"))
-    implementation("org.apache.logging.log4j:log4j-api:2.14.0")
-    implementation("org.apache.logging.log4j:log4j-core:2.14.0")
-    implementation("org.slf4j:slf4j-log4j12:1.7.28")
-    implementation("org.pf4j:pf4j:${pf4jVersion}")
-    implementation("org.apache.commons:commons-lang3:3.5")
+    implementation("org.apache.logging.log4j", "log4j-api")
+    implementation("org.apache.logging.log4j", "log4j-core")
+    implementation("org.slf4j", "slf4j-log4j12")
+    implementation("org.pf4j", "pf4j")
+    implementation("org.apache.commons", "commons-lang3")
 }
 
 application {
