@@ -1,4 +1,4 @@
-rootProject.name = "yunkuangao"
+rootProject.name = "gradle"
 
 include("plugin-framework")
 include("plugin-demo")
