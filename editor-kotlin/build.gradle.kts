@@ -1,20 +1,16 @@
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm")
-    id("org.jetbrains.compose")
+    id(libs.plugins.jvm.get().pluginId)
+    id(libs.plugins.compose.get().pluginId)
 }
 
 version = "0.1.0"
 
 dependencies {
     implementation(compose.desktop.currentOs)
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
 }
 
 compose.desktop {

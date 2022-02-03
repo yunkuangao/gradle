@@ -1,29 +1,24 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm")
+    id(libs.plugins.jvm.get().pluginId)
+    id(libs.plugins.plugin.serialization.get().pluginId)
     application
-    kotlin("plugin.serialization")
 }
 
 version = "0.1.0"
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("io.ktor", "ktor-server-core")
-    implementation("io.ktor", "ktor-server-netty")
-    implementation("io.ktor", "ktor-serialization")
-    implementation("com.alibaba", "druid")
-    implementation("com.beust", "klaxon")
-    implementation("com.deepoove", "poi-tl")
-    implementation("mysql", "mysql-connector-java")
-    implementation("org.mariadb.jdbc", "mariadb-java-client")
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.bundles.ktor.server)
+    implementation(libs.klaxon)
+    implementation(libs.poi.tl)
+    implementation(libs.mysql)
+    implementation(libs.mariadb)
+    implementation(libs.mysql)
     implementation(project(":tool-kotlin"))
-    implementation("org.jetbrains.kotlin", "kotlin-reflect")
 
-    testImplementation(kotlin("test"))
-}
-
-tasks.withType<JavaCompile>() {
-    options.encoding = "UTF-8"
+    testImplementation(libs.kotlin.test)
 }
 
 tasks.test {

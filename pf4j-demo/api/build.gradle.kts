@@ -1,8 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm")
+    id(libs.plugins.jvm.get().pluginId)
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    compileOnly("org.pf4j", "pf4j")
+    implementation(libs.kotlin.stdlib)
+    compileOnly(libs.pf4j)
 }

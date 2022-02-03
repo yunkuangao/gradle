@@ -1,12 +1,12 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("kapt")
+    id(libs.plugins.kapt.get().pluginId)
 }
 
 dependencies {
     compileOnly(project(":pf4j-demo:api"))
-    compileOnly(kotlin("stdlib"))
-
-    compileOnly("org.pf4j", "pf4j")
-    kapt("org.pf4j", "pf4j")
-    implementation("org.apache.commons", "commons-lang3")
+    compileOnly(libs.kotlin.stdlib)
+    compileOnly(libs.pf4j)
+    kapt(libs.pf4j)
+    implementation(libs.commons.lang3)
 }

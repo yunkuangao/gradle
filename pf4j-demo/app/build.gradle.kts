@@ -1,19 +1,20 @@
 val pluginsDir: File by project.parent!!.extra
 val appMainClass = "com.yunkuangao.BootKt"
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm")
+    id(libs.plugins.jvm.get().pluginId)
     application
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.log4j.api)
+    implementation(libs.log4j.core)
+    implementation(libs.slf4j.log4j12)
+    implementation(libs.pf4j)
+    implementation(libs.commons.lang3)
     implementation(project(":pf4j-demo:api"))
-    implementation("org.apache.logging.log4j", "log4j-api")
-    implementation("org.apache.logging.log4j", "log4j-core")
-    implementation("org.slf4j", "slf4j-log4j12")
-    implementation("org.pf4j", "pf4j")
-    implementation("org.apache.commons", "commons-lang3")
 }
 
 application {

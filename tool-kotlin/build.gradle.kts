@@ -1,20 +1,41 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm")
+    id(libs.plugins.jvm.get().pluginId)
+    `maven-publish`
 }
 
 version = "0.1.0"
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    testImplementation(kotlin("test"))
-}
+    implementation(libs.kotlin.stdlib)
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "17"
-    }
+    testImplementation(libs.kotlin.test)
 }
 
 tasks.test {
     useJUnitPlatform()
+}
+
+// publish maven repo
+val spaceUsername: String by project
+val spacePassword: String by project
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group.toString()
+            artifactId = "tool"
+            version = project.version.toString()
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            url = uri("https://maven.pkg.jetbrains.space/yunkuangao/p/yunkuangao/tool")
+            credentials {
+                username = spaceUsername
+                password = spacePassword
+            }
+        }
+    }
 }

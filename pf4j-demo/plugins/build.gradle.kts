@@ -1,7 +1,8 @@
 val pluginsDir: File by project.parent!!.extra
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("jvm") // need to apply kotlin plugin here as it provides 'build' task
+    id(libs.plugins.jvm.get().pluginId) // need to apply kotlin plugin here as it provides 'build' task
 }
 
 // here we define the tasks which will build the plugins in the subprojects
