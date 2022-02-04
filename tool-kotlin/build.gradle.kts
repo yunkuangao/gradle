@@ -12,10 +12,6 @@ dependencies {
     testImplementation(libs.kotlin.test)
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
 // publish maven repo
 val spaceUsername: String by project
 val spacePassword: String by project

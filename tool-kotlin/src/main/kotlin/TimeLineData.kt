@@ -93,7 +93,7 @@ open class TimeLineData<V> private constructor() {
      */
     val data: Map<String, BigDecimal>
         get() {
-            val temp: MutableMap<String, BigDecimal> = getTimeLineTemplate(dateType, start, end, init).toMutableMap()
+            val temp: MutableMap<String, BigDecimal> = getTimeLineTemplate(start, end, dateType, init).toMutableMap()
             temp.putAll(
                 dataList
                     .filter { perFilter.apply(it) }

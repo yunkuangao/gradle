@@ -1,13 +1,12 @@
 package com.yunkuangao
 
-import org.apache.commons.lang3.StringUtils
+import StringHelper
+import com.yunkuangao.api.Greeting
+import mu.KotlinLogging
 import org.pf4j.CompoundPluginDescriptorFinder
 import org.pf4j.DefaultPluginManager
 import org.pf4j.ManifestPluginDescriptorFinder
 import org.pf4j.PluginWrapper
-import com.yunkuangao.api.Greeting
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import java.nio.file.Path
 import java.nio.file.Paths
 
@@ -22,7 +21,7 @@ fun main() {
  */
 object Boot {
     // we wrap the demo method in a object so we have something the logger can refer to
-    private val logger: Logger = LoggerFactory.getLogger(Boot::class.java)
+    private val logger = KotlinLogging.logger {}
 
     private class PluginManager(importPaths: List<Path>) : DefaultPluginManager(importPaths) {
         override fun createPluginDescriptorFinder(): CompoundPluginDescriptorFinder {
@@ -98,8 +97,8 @@ object Boot {
     }
 
     private fun printLogo() {
-        logger.info(StringUtils.repeat("#", 40))
-        logger.info(StringUtils.center("PF4J-DEMO", 40))
-        logger.info(StringUtils.repeat("#", 40))
+        logger.info("#".repeat(40))
+        logger.info(StringHelper.center("PF4J-DEMO", 40))
+        logger.info("#".repeat(40))
     }
 }

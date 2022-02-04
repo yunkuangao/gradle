@@ -9,11 +9,9 @@ plugins {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
-    implementation(libs.log4j.api)
-    implementation(libs.log4j.core)
-    implementation(libs.slf4j.log4j12)
     implementation(libs.pf4j)
-    implementation(libs.commons.lang3)
+    implementation(libs.kotlin.logging)
+    implementation(project(":tool-kotlin"))
     implementation(project(":pf4j-demo:api"))
 }
 

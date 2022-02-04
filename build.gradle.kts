@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jvm) apply false
     alias(libs.plugins.compose) apply false
     alias(libs.plugins.plugin.serialization) apply false
-    alias(libs.plugins.kapt) apply false
+    alias(libs.plugins.ksp) apply false
 }
 
 subprojects {

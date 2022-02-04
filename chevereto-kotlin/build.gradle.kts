@@ -15,7 +15,6 @@ dependencies {
     implementation(libs.webdrivermanager)
     implementation(libs.bundles.ktor.client)
     implementation(libs.kotlin.logging)
-    implementation(libs.slf4j.simple)
     implementation(libs.clikt)
 }
 

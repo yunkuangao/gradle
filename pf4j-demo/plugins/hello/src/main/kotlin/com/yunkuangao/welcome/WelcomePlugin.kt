@@ -1,17 +1,15 @@
 package com.yunkuangao.welcome
 
-import org.apache.commons.lang3.StringUtils
+import com.yunkuangao.api.Greeting
+import mu.KotlinLogging
 import org.pf4j.Extension
 import org.pf4j.Plugin
 import org.pf4j.PluginWrapper
-import com.yunkuangao.api.Greeting
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 class WelcomePlugin(wrapper: PluginWrapper) : Plugin(wrapper) {
     override fun start() {
         logger.info("WelcomePlugin.start()")
-        logger.info(StringUtils.upperCase("WelcomePlugin"))
+        logger.info("WelcomePlugin".uppercase())
     }
 
     override fun stop() {
@@ -19,7 +17,7 @@ class WelcomePlugin(wrapper: PluginWrapper) : Plugin(wrapper) {
     }
 
     companion object {
-        private val logger: Logger = LoggerFactory.getLogger(WelcomePlugin::class.java)
+        private val logger = KotlinLogging.logger {}
     }
 
     @Extension

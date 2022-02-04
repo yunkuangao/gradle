@@ -1,6 +1,4 @@
 import java.util.*
-import java.util.function.Consumer
-import java.util.function.Function
 import java.util.stream.Collectors
 
 /**
@@ -74,9 +72,11 @@ object StringHelper {
      */
     fun <T> changeMapToKT(changeMap: Map<out Any, Any>, t: T): Map<*, *> {
         return changeMap.entries.stream()
-            .collect(Collectors.toMap(
-                { (key): Map.Entry<Any, Any> -> key as T },
-                { (_, value): Map.Entry<Any, Any> -> value as T }))
+            .collect(
+                Collectors.toMap(
+                    { (key): Map.Entry<Any, Any> -> key as T },
+                    { (_, value): Map.Entry<Any, Any> -> value as T })
+            )
     }
 
     /**
@@ -87,9 +87,11 @@ object StringHelper {
      */
     fun <K, V> changeMapToKT(changeMap: Map<out Any, Any>, t: K, v: V): Map<*, *> {
         return changeMap.entries.stream()
-            .collect(Collectors.toMap(
-                { (key): Map.Entry<Any, Any> -> key as K },
-                { (_, value): Map.Entry<Any, Any> -> value as V }))
+            .collect(
+                Collectors.toMap(
+                    { (key): Map.Entry<Any, Any> -> key as K },
+                    { (_, value): Map.Entry<Any, Any> -> value as V })
+            )
     }
 
     /**
@@ -113,5 +115,22 @@ object StringHelper {
      */
     fun getValue(value: Any): String {
         return value.toString()
+    }
+
+    fun center(s: String, size: Int): String {
+        return center(s, size, ' ')
+    }
+
+    fun center(s: String, size: Int, pad: Char): String {
+        if (size <= s.length) return s
+        val sb = StringBuilder(size)
+        for (i in 0 until (size - s.length) / 2) {
+            sb.append(pad)
+        }
+        sb.append(s)
+        while (sb.length < size) {
+            sb.append(pad)
+        }
+        return sb.toString()
     }
 }

@@ -11,11 +11,11 @@ import java.util.stream.Stream
 
 /**
  * @author yunkuangao
- * @apiNote
  */
 object DateKit {
+
     /**
-     * @apiNote get current date, ex: 2021-08-29
+     * get current date, ex: 2021-08-29
      */
     @JvmStatic
     fun nowStr(): String {
@@ -23,30 +23,37 @@ object DateKit {
     }
 
     /**
-     * @apiNote get date to String, ex: 2021-08-29
+     * get date to String, ex: 2021-08-29
      */
     fun getStr(date: LocalDateTime): String {
         return date.format(DateTimeFormatter.ISO_LOCAL_DATE)
     }
 
     /**
-     * @apiNote get date to String by dateType
+     * 获取时间类型对应的时间字符串
+     *
+     * @param date 时间
+     * @param dateType 时间类型
      */
-    @JvmStatic
     fun getStr(date: LocalDateTime, dateType: DateType): String {
         val dtf: DateTimeFormatter = when (dateType) {
             DateType.MONTH -> DateTimeFormatter.ofPattern("yyyy-MM")
             DateType.YEAR -> DateTimeFormatter.ofPattern("yyyy")
-            DateType.HOUR -> DateTimeFormatter.ofPattern("yyyy-MM-dd HH")
             DateType.DAY -> DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            DateType.HOUR -> DateTimeFormatter.ofPattern("yyyy-MM-dd HH")
         }
         return dtf.format(date)
     }
 
     /**
-     * @apiNote get timeline template
+     * get timeline template
      */
-    fun getTimeLineTemplate(dateType: DateType, start: LocalDateTime, end: LocalDateTime, init: BigDecimal): Map<String, BigDecimal> {
+    fun getTimeLineTemplate(
+        start: LocalDateTime,
+        end: LocalDateTime,
+        dateType: DateType = DateType.YEAR,
+        init: BigDecimal = BigDecimal.ZERO,
+    ): Map<String, BigDecimal> {
         val adder: UnaryOperator<LocalDateTime>
         val maxSize: Long
         val key = Function { it: LocalDateTime -> getStr(it, dateType) }
@@ -68,22 +75,21 @@ object DateKit {
                 maxSize = ChronoUnit.MONTHS.between(start, end) + 1
             }
         }
-        return getTimeLineTemplate(start, init, adder, maxSize, key)
+        return getTimeLineTemplate(start, adder, maxSize, key, init)
     }
 
     /**
-     * @apiNote get timeline template, core method
+     * get timeline template, core method
      */
     private fun getTimeLineTemplate(
         start: LocalDateTime,
-        init: BigDecimal,
         adder: UnaryOperator<LocalDateTime>,
         maxSize: Long,
         key: Function<LocalDateTime, String>,
-    ): Map<String, BigDecimal> {
-        return Stream.iterate(start, adder)
-            .limit(maxSize)
-            .map(key)
-            .collect(Collectors.toMap({ obj: String -> obj }, { init }))
-    }
+        init: BigDecimal = BigDecimal.ZERO,
+    ): Map<String, BigDecimal> = Stream.iterate(start, adder)
+        .limit(maxSize)
+        .map(key)
+        .collect(Collectors.toMap({ obj: String -> obj }, { init }))
+
 }

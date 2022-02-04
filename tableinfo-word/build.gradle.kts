@@ -21,10 +21,6 @@ dependencies {
     testImplementation(libs.kotlin.test)
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
-
 application {
     mainClass.set("io.ktor.server.netty.EngineMain")
 }
