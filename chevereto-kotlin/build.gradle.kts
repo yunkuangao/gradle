@@ -14,7 +14,7 @@ dependencies {
     implementation(libs.selenium)
     implementation(libs.webdrivermanager)
     implementation(libs.bundles.ktor.client)
-    implementation(libs.kotlin.logging)
+    implementation(libs.bundles.logging)
     implementation(libs.clikt)
 }
 

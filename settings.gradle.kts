@@ -42,26 +42,40 @@ dependencyResolutionManagement {
 
             val kotlinVersion = extra["kotlin.version"] as String
             val composeVersion = extra["compose.version"] as String
+            val kspVersion = extra["ksp.version"] as String
+            val ktorVersion = extra["ktor.version"] as String
+            val kotlinloggingVersion = extra["kotlinlogging.version"] as String
+            val cliktVersion = extra["clikt.version"] as String
+            val seleniumVersion = extra["selenium.version"] as String
+            val webdriverVersion = extra["webdriver.version"] as String
+            val klaxonVersion = extra["klaxon.version"] as String
+            val pf4jVersion = extra["pf4j.version"] as String
+            val poitlVersion = extra["poitl.version"] as String
+            val mariadbVersion = extra["mariadb.version"] as String
+            val mysqlVersion = extra["mysql.version"] as String
+            val slf4jVersion = extra["slf4j.version"] as String
 
             // version
             version("kotlin", kotlinVersion)
             version("compose", composeVersion)
-            version("ktor", "1.6.7")
-            version("kotlin-logging", "1.12.5")
-            version("clikt", "3.4.0")
-            version("selenium", "4.1.1")
-            version("webdriver", "5.0.3")
-            version("klaxon", "5.5")
-            version("pf4j", "3.6.0")
-            version("poi-tl", "1.11.1")
-            version("mariadb", "2.1.2")
-            version("mysql", "8.0.27")
+            version("ksp", kspVersion)
+            version("ktor", ktorVersion)
+            version("kotlinlogging", kotlinloggingVersion)
+            version("clikt", cliktVersion)
+            version("selenium", seleniumVersion)
+            version("webdriver", webdriverVersion)
+            version("klaxon", klaxonVersion)
+            version("pf4j", pf4jVersion)
+            version("poitl", poitlVersion)
+            version("mariadb", mariadbVersion)
+            version("mysql", mysqlVersion)
+            version("slf4j", slf4jVersion)
 
             // plugin
             alias("compose").toPluginId("org.jetbrains.compose").versionRef("compose")
             alias("jvm").toPluginId("org.jetbrains.kotlin.jvm").versionRef("kotlin")
             alias("plugin-serialization").toPluginId("org.jetbrains.kotlin.plugin.serialization").versionRef("kotlin")
-            alias("ksp").toPluginId("com.google.devtools.ksp").version("1.6.10-1.0.2")
+            alias("ksp").toPluginId("com.google.devtools.ksp").versionRef("ksp")
 
             // dependency
             alias("kotlin-reflect").to("org.jetbrains.kotlin", "kotlin-reflect").versionRef("kotlin")
@@ -75,7 +89,9 @@ dependencyResolutionManagement {
             alias("ktor-freemarker").to("io.ktor", "ktor-freemarker").versionRef("ktor")
             alias("ktor-serialization").to("io.ktor", "ktor-serialization").versionRef("ktor")
 
-            alias("kotlin-logging").to("io.github.microutils", "kotlin-logging").versionRef("kotlin-logging")
+            alias("kotlin-logging").to("io.github.microutils", "kotlin-logging").versionRef("kotlinlogging")
+            alias("slf4j-api").to("org.slf4j", "slf4j-api").versionRef("slf4j")
+            alias("slf4j-simple").to("org.slf4j", "slf4j-simple").versionRef("slf4j")
 
             alias("webdrivermanager").to("io.github.bonigarcia", "webdrivermanager").versionRef("webdriver")
             alias("selenium").to("org.seleniumhq.selenium", "selenium-java").versionRef("selenium")
@@ -83,7 +99,7 @@ dependencyResolutionManagement {
             alias("pf4j").to("org.pf4j", "pf4j").versionRef("pf4j")
             alias("clikt").to("com.github.ajalt.clikt", "clikt").versionRef("clikt")
             alias("klaxon").to("com.beust", "klaxon").versionRef("klaxon")
-            alias("poi-tl").to("com.deepoove", "poi-tl").versionRef("poi-tl")
+            alias("poi-tl").to("com.deepoove", "poi-tl").versionRef("poitl")
 
             alias("mariadb").to("org.mariadb.jdbc", "mariadb-java-client").versionRef("mariadb")
             alias("mysql").to("mysql", "mysql-connector-java").versionRef("mysql")
@@ -91,6 +107,7 @@ dependencyResolutionManagement {
             // dependency bundle
             bundle("ktor-server", listOf("ktor-server-core", "ktor-server-netty", "ktor-serialization"))
             bundle("ktor-client", listOf("ktor-client-core", "ktor-client-cio", "ktor-client-serialization"))
+            bundle("logging", listOf("kotlin-logging", "slf4j-api", "slf4j-simple"))
 
             // testImplementation
             alias("kotlin-test").to("org.jetbrains.kotlin", "kotlin-test").versionRef("kotlin")
