@@ -12,21 +12,9 @@ include("tool-kotlin")
 include("tableinfo-word")
 
 enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 dependencyResolutionManagement {
-
-    pluginManagement {
-        repositories {
-            mavenLocal()
-            google()
-            gradlePluginPortal()
-            mavenCentral()
-            maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-            maven("https://maven.pkg.jetbrains.space/public/p/ktor/eap")
-        }
-
-    }
-
     versionCatalogs {
 
         repositories {
@@ -40,20 +28,20 @@ dependencyResolutionManagement {
 
         create("libs") {
 
-            val kotlinVersion = extra["kotlin.version"] as String
-            val composeVersion = extra["compose.version"] as String
-            val kspVersion = extra["ksp.version"] as String
-            val ktorVersion = extra["ktor.version"] as String
-            val kotlinloggingVersion = extra["kotlinlogging.version"] as String
-            val cliktVersion = extra["clikt.version"] as String
-            val seleniumVersion = extra["selenium.version"] as String
-            val webdriverVersion = extra["webdriver.version"] as String
-            val klaxonVersion = extra["klaxon.version"] as String
-            val pf4jVersion = extra["pf4j.version"] as String
-            val poitlVersion = extra["poitl.version"] as String
-            val mariadbVersion = extra["mariadb.version"] as String
-            val mysqlVersion = extra["mysql.version"] as String
-            val slf4jVersion = extra["slf4j.version"] as String
+            val kotlinVersion = extra["kotlinVersion"] as String
+            val composeVersion = extra["composeVersion"] as String
+            val kspVersion = extra["kspVersion"] as String
+            val ktorVersion = extra["ktorVersion"] as String
+            val kotlinloggingVersion = extra["kotlinloggingVersion"] as String
+            val cliktVersion = extra["cliktVersion"] as String
+            val seleniumVersion = extra["seleniumVersion"] as String
+            val webdriverVersion = extra["webdriverVersion"] as String
+            val klaxonVersion = extra["klaxonVersion"] as String
+            val pf4jVersion = extra["pf4jVersion"] as String
+            val poitlVersion = extra["poitlVersion"] as String
+            val mariadbVersion = extra["mariadbVersion"] as String
+            val mysqlVersion = extra["mysqlVersion"] as String
+            val slf4jVersion = extra["slf4jVersion"] as String
 
             // version
             version("kotlin", kotlinVersion)

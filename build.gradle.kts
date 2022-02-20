@@ -11,7 +11,7 @@ subprojects {
     group = "com.yunkuangao"
     version = "0.1.0"
 
-    tasks.withType<JavaCompile>() {
+    tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
     }
 

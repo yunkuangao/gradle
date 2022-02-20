@@ -1,16 +1,12 @@
-import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id(libs.plugins.jvm.get().pluginId)
-    id(libs.plugins.compose.get().pluginId)
+    application
 }
 
 version = "0.1.0"
 
 dependencies {
-    implementation(compose.desktop.currentOs)
     implementation(libs.selenium)
     implementation(libs.webdrivermanager)
     implementation(libs.bundles.ktor.client)
@@ -18,13 +14,17 @@ dependencies {
     implementation(libs.clikt)
 }
 
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-        nativeDistributions {
-            targetFormats(TargetFormat.Msi, TargetFormat.AppImage, TargetFormat.Exe)
-            packageName = "chevereto-kotlin"
-            packageVersion = "1.0.0"
-        }
-    }
+application {
+    applicationName = "chevereto"
+    mainClass.set("com.yunkuangao.chevereto.MainKt")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    modularity.inferModulePath.set(true)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "17"
 }
