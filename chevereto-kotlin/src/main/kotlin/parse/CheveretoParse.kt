@@ -42,7 +42,7 @@ class CheveretoParse(
 
     fun download(): Boolean {
         return try {
-            images().run { logger.info("chevereto download finish") }
+            images().run { logger.info("chevereto下载完成") }
             true
         } catch (e: Exception) {
             logger.error(e.message)
@@ -58,8 +58,15 @@ class CheveretoParse(
         driver.get(cheveretoInfo.url.toString() + albums)
 
         return driver.findElements(By.className("list-item-desc-title-link"))
-            .map { CacheInfo(it.getAttribute("href"), it.getAttribute("innerText")) }
-            .also { cheveretoInfo.categorys.addAll(it) }
+            .map {
+                CacheInfo(
+                    it.getAttribute("href"),
+                    it.getAttribute("innerText")
+                ).also { info -> logger.info("找到${info.name}集锦") }
+            }
+            .also {
+                cheveretoInfo.categorys.addAll(it)
+            }
     }
 
     private fun getImages(): List<CacheInfo> {
@@ -86,7 +93,8 @@ class CheveretoParse(
 
     private fun saveImage(images: List<CacheInfo>) {
         images.forEach {
-            val filePath = musicDirector() + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
+            val filePath =
+                musicDirector() + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
 
             if (!cacheFiles.contains(it.name)) {
                 runBlocking {
@@ -94,12 +102,15 @@ class CheveretoParse(
                         val httpResponse: HttpResponse = retryIO(times = 3) {
                             client.get(it.url) {
                                 onDownload { bytesSentTotal, contentLength ->
-                                    logger.debug("Received $bytesSentTotal bytes from $contentLength")
+                                    logger.debug("接收$bytesSentTotal 字节 从 $contentLength")
                                 }
                             }
                         }
 
-                        writeFile(filePath, httpResponse.receive()).run { logger.info("A file ${it.name} saved to $filePath") }
+                        writeFile(
+                            filePath,
+                            httpResponse.receive()
+                        ).run { logger.info("保存文件${it.name} 到$filePath") }
 
                     } catch (e: Exception) {
                         logger.error(e.message)
@@ -107,7 +118,7 @@ class CheveretoParse(
                     }
                 }
             } else {
-                logger.debug("file ${it.name} was saved to $filePath")
+                logger.debug("文件 ${it.name} 已存在于$filePath")
             }
         }
     }
