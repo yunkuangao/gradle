@@ -12,11 +12,14 @@ dependencies {
     implementation(libs.bundles.ktor.client)
     implementation(libs.bundles.logging)
     implementation(libs.clikt)
+    implementation(project(":tool-kotlin"))
+    implementation(project(":download-kotlin"))
+    implementation(project(":selenium-kotlin"))
 }
 
 application {
     applicationName = "chevereto"
-    mainClass.set("com.yunkuangao.chevereto.MainKt")
+    mainClass.set("MainKt")
 }
 
 java {

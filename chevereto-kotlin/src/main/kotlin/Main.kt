@@ -2,6 +2,8 @@ import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
 import handler.chrome
 import handler.chromeOption
+import handler.firefox
+import handler.firefoxOption
 import model.CheveretoInfo
 import parse.CheveretoParse
 
@@ -16,7 +18,7 @@ class Chevereto : CliktCommand() {
 }
 
 fun chevereto(host: String) {
-    val cheveretoParse = CheveretoParse(CheveretoInfo(host), chrome(chromeOption(listOf())))
+    val cheveretoParse = CheveretoParse(CheveretoInfo(host), firefox(firefoxOption(listOf())))
     cheveretoParse.download()
     cheveretoParse.quit()
 }

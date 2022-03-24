@@ -1,12 +1,13 @@
 package parse
 
-import constant.cacheFileList
-import constant.musicDirector
-import constant.sep
+import file.cacheFileList
+import file.musicDirectory
+import file.sep
+import file.writeFile
 import handler.chrome
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.plugins.*
+import io.ktor.client.features.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
@@ -17,12 +18,11 @@ import mu.KotlinLogging
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
 import util.retryIO
-import util.writeFile
 
 class CheveretoParse(
     private val cheveretoInfo: CheveretoInfo,
     private val driver: WebDriver = chrome(),
-) {
+) : CommonParse {
 
     private val client = HttpClient {
         install(HttpTimeout) {
@@ -32,17 +32,17 @@ class CheveretoParse(
 
     private val logger = KotlinLogging.logger {}
 
-    fun categorys(): List<CacheInfo> {
+    override fun category(): List<CacheInfo> {
         return if (cheveretoInfo.categorys.size > 0) cheveretoInfo.categorys else getCategorys()
     }
 
-    fun images(): List<CacheInfo> {
+    override fun files(): List<CacheInfo> {
         return if (cheveretoInfo.images.size > 0) cheveretoInfo.images else getImages()
     }
 
-    fun download(): Boolean {
+    override fun download(): Boolean {
         return try {
-            images().run { logger.info("chevereto下载完成") }
+            files().run { logger.info("chevereto下载完成") }
             true
         } catch (e: Exception) {
             logger.error(e.message)
@@ -94,7 +94,7 @@ class CheveretoParse(
     private fun saveImage(images: List<CacheInfo>) {
         images.forEach {
             val filePath =
-                musicDirector() + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
+                musicDirectory + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
 
             if (!cacheFiles.contains(it.name)) {
                 runBlocking {
@@ -109,7 +109,7 @@ class CheveretoParse(
 
                         writeFile(
                             filePath,
-                            httpResponse.body()
+                            httpResponse.receive()
                         ).run { logger.info("保存文件${it.name} 到$filePath") }
 
                     } catch (e: Exception) {
@@ -133,7 +133,7 @@ class CheveretoParse(
         }
 
         fun updateCacheFiles() {
-            cacheFiles = cacheFileList(musicDirector() + sep + cheveretoPath, mutableListOf())
+            cacheFiles = cacheFileList(musicDirectory + sep + cheveretoPath, mutableListOf())
         }
     }
 

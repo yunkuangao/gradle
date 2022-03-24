@@ -3,8 +3,8 @@ package model
 import java.net.URL
 
 class CheveretoInfo(
-    val url: URL,
-) {
+    override val url: URL,
+) : CommonInfo(url = url) {
     val categorys: MutableList<CacheInfo> = mutableListOf()
     val images: MutableList<CacheInfo> = mutableListOf()
 
