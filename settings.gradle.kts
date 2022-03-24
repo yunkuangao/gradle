@@ -11,6 +11,7 @@ include("funkwhale-kotlin")
 include("tool-kotlin")
 include("tableinfo-word")
 include("selenium-kotlin")
+include("download-kotlin")
 
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
