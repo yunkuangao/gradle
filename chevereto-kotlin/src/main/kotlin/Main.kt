@@ -1,7 +1,5 @@
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
-import handler.chrome
-import handler.chromeOption
 import handler.firefox
 import handler.firefoxOption
 import model.CheveretoInfo
