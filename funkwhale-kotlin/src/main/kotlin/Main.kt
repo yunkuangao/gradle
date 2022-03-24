@@ -1,7 +1,5 @@
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
-import handler.chrome
-import handler.chromeOption
 import model.FunkwhaleInfo
 import parse.FunkwhaleParse
 
@@ -15,7 +13,12 @@ class Funkwhale : CliktCommand() {
 }
 
 fun funkwhale(host: String) {
-    val funkwhaleParse = FunkwhaleParse(FunkwhaleInfo(url = host, username = "yun", password = "namesake-chute-aardvark-omissible-icing"), chrome(chromeOption(listOf())))
+    val funkwhaleParse = FunkwhaleParse(
+        FunkwhaleInfo(
+            url = host,
+            username = "yun",
+            password = "namesake-chute-aardvark-omissible-icing"
+        )
+    )
     funkwhaleParse.download()
-    funkwhaleParse.quit()
 }
