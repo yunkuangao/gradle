@@ -140,7 +140,6 @@ class FunkwhaleParse(
         }
 
         fun updateCacheFiles() {
-            createDirectory(musicDirectory + sep + savePath) // ensure music director exist
             cacheFiles = cacheFileList(musicDirectory + sep + savePath, mutableListOf())
         }
     }
