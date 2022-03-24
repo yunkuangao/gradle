@@ -9,6 +9,7 @@ version = "0.1.0"
 dependencies {
     implementation(libs.bundles.ktor.client)
     implementation(libs.kotlin.logging)
+    implementation(libs.slf4j.simple)
     implementation(libs.clikt)
     implementation(libs.klaxon)
     implementation(project(":tool-kotlin"))
