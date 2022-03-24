@@ -1,31 +1,31 @@
-package constant
+package file
 
 import java.io.File
 
 /**
  * 返回用户音乐目录
  */
-val musicDirector = getDirector(UserDirectors("music", listOf("music", "音乐")))
+val musicDirectory = getDirectory(UserDirectory("music", listOf("music", "音乐")))
 
 /**
  * 返回用户图片目录
  */
-val pictureDirector = getDirector(UserDirectors("picture", listOf("picture", "图片")))
+val pictureDirectory = getDirectory(UserDirectory("picture", listOf("picture", "图片")))
 
 /**
  * 返回目录
  */
-fun getDirector(directors: UserDirectors): String = File(System.getProperty("user.home"))
+fun getDirectory(directory: UserDirectory): String = File(System.getProperty("user.home"))
     .listFiles()
-    ?.filter { directors.directors.contains(it.name) }
+    ?.filter { directory.directory.contains(it.name) }
     ?.get(0)
-    ?.absolutePath ?: (System.getProperty("user.dir") + sep + directors.default)
+    ?.absolutePath ?: (System.getProperty("user.dir") + sep + directory.default)
 
 /**
  * @property default 默认目录
  * @property directors 目录列表
  */
-data class UserDirectors(val default: String, val directors: List<String>)
+data class UserDirectory(val default: String, val directory: List<String>)
 
 /**
  * 目录分隔符
@@ -40,6 +40,10 @@ val sep: String = File.separator
  * @return List<String>
  */
 fun cacheFileList(filePath: String, fileArr: MutableList<String>): List<String> {
+
+    // 保证文件夹存在，若不存在则创建
+    existDirectory(filePath)
+
     val files = File(filePath).listFiles()
     for (k in files.indices) {
         if (files[k].isDirectory) {
