@@ -1,31 +1,31 @@
-import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     id(libs.plugins.jvm.get().pluginId)
-    id(libs.plugins.compose.get().pluginId)
+    application
 }
 
 version = "0.1.0"
 
 dependencies {
-    implementation(compose.desktop.currentOs)
-    implementation(libs.selenium)
-    implementation(libs.webdrivermanager)
     implementation(libs.bundles.ktor.client)
     implementation(libs.kotlin.logging)
     implementation(libs.clikt)
     implementation(libs.klaxon)
+    implementation(project(":tool-kotlin"))
+    implementation(project(":download-kotlin"))
 }
 
-compose.desktop {
-    application {
-        mainClass = "MainKt"
-        nativeDistributions {
-            targetFormats(TargetFormat.Msi, TargetFormat.AppImage, TargetFormat.Exe)
-            packageName = "funkwhale-kotlin"
-            packageVersion = "1.0.0"
-        }
-    }
+application {
+    applicationName = "funkwhale"
+    mainClass.set("MainKt")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+    modularity.inferModulePath.set(true)
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "17"
 }

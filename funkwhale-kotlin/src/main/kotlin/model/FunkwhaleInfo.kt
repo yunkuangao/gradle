@@ -3,10 +3,10 @@ package model
 import java.net.URL
 
 class FunkwhaleInfo(
-    val url: URL,
+    override val url: URL,
     val username: String = "",
     val password: String = "",
-) {
+) : CommonInfo(url = url) {
     val albums: MutableList<CacheInfo> = mutableListOf()
     val musics: MutableList<CacheInfo> = mutableListOf()
 
