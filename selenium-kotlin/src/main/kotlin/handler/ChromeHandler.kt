@@ -10,12 +10,12 @@ import org.openqa.selenium.chrome.ChromeOptions
  *
  * @param options 浏览器选项
  */
-fun chrome(options: ChromeOptions = chromeOption(defaultOptions)): WebDriver {
+fun chrome(options: ChromeOptions = chromeOption(defaultChromeOptions)): WebDriver {
     WebDriverManager.chromedriver().setup()
     return ChromeDriver(options)
 }
 
-val defaultOptions = listOf("--headless")
+val defaultChromeOptions = listOf("--headless")
 
 /**
  * 设置chrome的选项
@@ -24,7 +24,7 @@ val defaultOptions = listOf("--headless")
  */
 fun chromeOption(options: List<String>): ChromeOptions {
     val chromeOptions = ChromeOptions()
-    if (options.isEmpty()) chromeOptions.addArguments(defaultOptions)
+    if (options.isEmpty()) chromeOptions.addArguments(defaultChromeOptions)
     else chromeOptions.addArguments(options)
     return chromeOptions
 }

@@ -10,6 +10,7 @@ include("chevereto-kotlin")
 include("funkwhale-kotlin")
 include("tool-kotlin")
 include("tableinfo-word")
+include("selenium-kotlin")
 
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
