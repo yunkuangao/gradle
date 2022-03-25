@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id(libs.plugins.ksp.get().pluginId)
+    alias(libs.plugins.ksp)
 }
 
 dependencies {

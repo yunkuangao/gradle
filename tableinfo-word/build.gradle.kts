@@ -1,7 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id(libs.plugins.jvm.get().pluginId)
-    id(libs.plugins.plugin.serialization.get().pluginId)
+    alias(libs.plugins.jvm)
+    alias(libs.plugins.plugin.serialization)
     application
 }
 

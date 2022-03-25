@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id(libs.plugins.jvm.get().pluginId)
+    alias(libs.plugins.jvm)
 }
 
 version = "0.1.0"

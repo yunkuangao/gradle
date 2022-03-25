@@ -1,11 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
-plugins {
-    alias(libs.plugins.jvm) apply false
-    alias(libs.plugins.compose) apply false
-    alias(libs.plugins.plugin.serialization) apply false
-    alias(libs.plugins.ksp) apply false
-}
-
 subprojects {
 
     group = "com.yunkuangao"
@@ -13,11 +5,5 @@ subprojects {
 
     tasks.withType<JavaCompile> {
         options.encoding = "UTF-8"
-    }
-
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "17"
-        }
     }
 }
