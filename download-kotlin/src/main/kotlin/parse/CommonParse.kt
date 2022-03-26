@@ -4,9 +4,9 @@ import model.CacheInfo
 
 interface CommonParse {
 
-    fun category(): List<CacheInfo>
+    fun categoryList(): List<CacheInfo>
 
-    fun files(): List<CacheInfo>
+    fun fileList(): List<CacheInfo>
 
     fun download(): Boolean
 

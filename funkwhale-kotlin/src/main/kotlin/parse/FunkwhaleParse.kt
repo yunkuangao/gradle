@@ -28,11 +28,11 @@ class FunkwhaleParse(
 
     private val logger = KotlinLogging.logger {}
 
-    override fun category(): List<CacheInfo> {
+    override fun categoryList(): List<CacheInfo> {
         return if (funkwhaleInfo.albums.size > 0) funkwhaleInfo.albums else getInfo(albumB = true).run { funkwhaleInfo.albums }
     }
 
-    override fun files(): List<CacheInfo> {
+    override fun fileList(): List<CacheInfo> {
         return if (funkwhaleInfo.musics.size > 0) funkwhaleInfo.musics else getInfo(musicB = true).run { funkwhaleInfo.musics }
     }
 

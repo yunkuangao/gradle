@@ -32,17 +32,17 @@ class CheveretoParse(
 
     private val logger = KotlinLogging.logger {}
 
-    override fun category(): List<CacheInfo> {
+    override fun categoryList(): List<CacheInfo> {
         return if (cheveretoInfo.categorys.size > 0) cheveretoInfo.categorys else getCategorys()
     }
 
-    override fun files(): List<CacheInfo> {
+    override fun fileList(): List<CacheInfo> {
         return if (cheveretoInfo.images.size > 0) cheveretoInfo.images else getImages()
     }
 
     override fun download(): Boolean {
         return try {
-            files().run { logger.info("chevereto下载完成") }
+            fileList().run { logger.info("chevereto下载完成") }
             true
         } catch (e: Exception) {
             logger.error(e.message)
