@@ -1,12 +1,14 @@
 import freemarker.cache.ClassTemplateLoader
-import io.ktor.application.*
-import io.ktor.features.*
-import io.ktor.freemarker.*
 import io.ktor.http.*
-import io.ktor.http.content.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.serialization.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.freemarker.*
+import io.ktor.server.http.content.*
+import io.ktor.server.plugins.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import mu.KotlinLogging
 import routes.build
 import routes.option
@@ -29,7 +31,7 @@ fun Application.module() {
     }
 
     install(StatusPages) {
-        exception<Throwable> { cause ->
+        exception<Throwable> { call, cause ->
             call.respond(HttpStatusCode.InternalServerError, "Internal Server Error")
                 .also { logger.error { cause.message } }
             throw cause

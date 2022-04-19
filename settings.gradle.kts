@@ -71,13 +71,16 @@ dependencyResolutionManagement {
             alias("kotlin-reflect").to("org.jetbrains.kotlin", "kotlin-reflect").versionRef("kotlin")
             alias("kotlin-stdlib").to("org.jetbrains.kotlin", "kotlin-stdlib").versionRef("kotlin")
 
-            alias("ktor-server-core").to("io.ktor", "ktor-server-core").versionRef("ktor")
-            alias("ktor-server-netty").to("io.ktor", "ktor-server-netty").versionRef("ktor")
             alias("ktor-client-core").to("io.ktor", "ktor-client-core").versionRef("ktor")
             alias("ktor-client-cio").to("io.ktor", "ktor-client-cio").versionRef("ktor")
-            alias("ktor-client-serialization").to("io.ktor", "ktor-client-serialization").versionRef("ktor")
-            alias("ktor-freemarker").to("io.ktor", "ktor-freemarker").versionRef("ktor")
-            alias("ktor-serialization").to("io.ktor", "ktor-serialization").versionRef("ktor")
+            alias("ktor-client-serialization").to("io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
+            alias("ktor-client-serialization").to("io.ktor", "ktor-client-content-negotiation").versionRef("ktor")
+
+            alias("ktor-server-netty").to("io.ktor", "ktor-server-netty").versionRef("ktor")
+            alias("ktor-freemarker").to("io.ktor", "ktor-server-freemarker").versionRef("ktor")
+            alias("ktor-serialization").to("io.ktor", "ktor-serialization-kotlinx-json").versionRef("ktor")
+            alias("ktor-negotiation").to("io.ktor", "ktor-server-content-negotiation").versionRef("ktor")
+            alias("ktor-status-pages").to("io.ktor", "ktor-server-status-pages").versionRef("ktor")
 
             alias("kotlin-logging").to("io.github.microutils", "kotlin-logging").versionRef("kotlinlogging")
             alias("slf4j-api").to("org.slf4j", "slf4j-api").versionRef("slf4j")
@@ -95,7 +98,7 @@ dependencyResolutionManagement {
             alias("mysql").to("mysql", "mysql-connector-java").versionRef("mysql")
 
             // dependency bundle
-            bundle("ktor-server", listOf("ktor-server-core", "ktor-server-netty", "ktor-serialization"))
+            bundle("ktor-server", listOf("ktor-server-netty", "ktor-serialization", "ktor-negotiation", "ktor-status-pages","ktor-freemarker"))
             bundle("ktor-client", listOf("ktor-client-core", "ktor-client-cio", "ktor-client-serialization"))
             bundle("logging", listOf("kotlin-logging", "slf4j-api", "slf4j-simple"))
 

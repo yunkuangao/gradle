@@ -12,7 +12,6 @@ dependencies {
     implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.logging)
     implementation(libs.bundles.ktor.server)
-    implementation(libs.ktor.freemarker)
     implementation(libs.klaxon)
     implementation(libs.poi.tl)
     implementation(libs.mysql)

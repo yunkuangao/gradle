@@ -5,8 +5,8 @@ import com.beust.klaxon.Parser
 import file.*
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
+import io.ktor.client.plugins.*
+import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.runBlocking
@@ -23,7 +23,7 @@ class FunkwhaleParse(
         install(HttpTimeout) {
             requestTimeoutMillis = 30 * 1000
         }
-        install(JsonFeature)
+        install(ContentNegotiation)
     }
 
     private val logger = KotlinLogging.logger {}
@@ -56,7 +56,7 @@ class FunkwhaleParse(
 
         runBlocking {
             try {
-                val searchResult: String = retryIO(times = 3) { client.get(url) }
+                val searchResult: String = retryIO(times = 3) { client.get(url).bodyAsText() }
 
                 val json: JsonObject = Parser.default().parse(StringBuilder(searchResult)) as JsonObject
 
@@ -117,7 +117,7 @@ class FunkwhaleParse(
                         }
                         writeFile(
                             filePath,
-                            httpResponse.receive()
+                            httpResponse.readBytes()
                         ).run { logger.info("A file ${it.name} saved to $filePath") }
                     } catch (e: Exception) {
                         logger.error(e.message)

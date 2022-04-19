@@ -15,23 +15,23 @@ dependencies {
 // publish maven repo
 val spaceUsername: String by project
 val spacePassword: String by project
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = project.group.toString()
-            artifactId = "tool"
-            version = project.version.toString()
-            from(components["java"])
-        }
-    }
-    repositories {
-        maven {
-            url = uri("https://maven.pkg.jetbrains.space/yunkuangao/p/yunkuangao/tool")
-            credentials {
-                username = spaceUsername
-                password = spacePassword
-            }
-        }
-    }
-}
+//
+//publishing {
+//    publications {
+//        create<MavenPublication>("maven") {
+//            groupId = project.group.toString()
+//            artifactId = "tool"
+//            version = project.version.toString()
+//            from(components["java"])
+//        }
+//    }
+//    repositories {
+//        maven {
+//            url = uri("https://maven.pkg.jetbrains.space/yunkuangao/p/yunkuangao/tool")
+//            credentials {
+//                username = spaceUsername
+//                password = spacePassword
+//            }
+//        }
+//    }
+//}
