@@ -5,12 +5,12 @@ import java.io.File
 /**
  * 返回用户音乐目录
  */
-val musicDirectory = getDirectory(UserDirectory("music", listOf("music", "音乐")))
+val musicDirectory = getDirectory(UserDirectory("music", listOf("music", "音乐", "Music")))
 
 /**
  * 返回用户图片目录
  */
-val pictureDirectory = getDirectory(UserDirectory("picture", listOf("picture", "图片")))
+val pictureDirectory = getDirectory(UserDirectory("picture", listOf("picture", "图片", "Pictures")))
 
 /**
  * 返回目录
