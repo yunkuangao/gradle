@@ -1,12 +1,12 @@
 package parse
 
 import file.cacheFileList
-import file.musicDirectory
+import file.pictureDirectory
 import file.sep
 import file.writeFile
 import handler.chrome
 import io.ktor.client.*
-import io.ktor.client.call.*
+import io.ktor.client.engine.*
 import io.ktor.client.plugins.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -22,9 +22,13 @@ import util.retryIO
 class CheveretoParse(
     private val cheveretoInfo: CheveretoInfo,
     private val driver: WebDriver = chrome(),
+    private val proxys: String = "",
 ) : CommonParse {
 
     private val client = HttpClient {
+        engine {
+            if (proxys.isNotEmpty()) proxy = ProxyBuilder.http(proxys)
+        }
         install(HttpTimeout) {
             requestTimeoutMillis = 30 * 1000
         }
@@ -94,7 +98,7 @@ class CheveretoParse(
     private fun saveImage(images: List<CacheInfo>) {
         images.forEach {
             val filePath =
-                musicDirectory + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
+                pictureDirectory + sep + cheveretoPath + sep + it.parent + sep + it.url.substring(it.url.lastIndexOf("/"))
 
             if (!cacheFiles.contains(it.name)) {
                 runBlocking {
@@ -133,7 +137,7 @@ class CheveretoParse(
         }
 
         fun updateCacheFiles() {
-            cacheFiles = cacheFileList(musicDirectory + sep + cheveretoPath, mutableListOf())
+            cacheFiles = cacheFileList(pictureDirectory + sep + cheveretoPath, mutableListOf())
         }
     }
 
