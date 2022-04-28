@@ -8,7 +8,7 @@ fun writeFile(
     path: String,
     data: ByteArray,
 ) {
-    createDirectory(path.substring(0, path.lastIndexOf(sep)))
+    existDirectory(path.substring(0, path.lastIndexOf(sep)))
     val file = File(path)
     file.writeBytes(data)
 }
