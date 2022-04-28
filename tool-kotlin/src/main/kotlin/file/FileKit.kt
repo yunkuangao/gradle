@@ -24,6 +24,6 @@ fun existDirectory(path: String) {
 }
 
 fun validFileName(name: String): String = name.map {
-    if ("~!@#$%^&*，。；‘’\\{【】[]}|/".contains(it)) ' '
+    if ("~!@#$%^&*，。；:‘’\\{【】[]}|/".contains(it)) ' '
     else it
 }.joinToString("")
