@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.jvm)
     application
+    id("org.beryx.runtime") version "1.12.7"
 }
 
 version = "0.1.0"
@@ -31,3 +32,18 @@ java {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
 }
+
+
+runtime {
+    options.addAll("--strip-debug", "--compress", "2", "--no-header-files", "--no-man-pages")
+    javaHome.set("C:\\Users\\yun\\.jdks\\openjdk-17.0.2")
+    modules.addAll("java.base", "java.logging", "java.xml", "java.instrument")
+}
+
+// 附加资源文件
+//tasks.runtime.doLast {
+//    copy {
+//        from('src/main/resources')
+//        into("$buildDir/image/bin")
+//    }
+//}
