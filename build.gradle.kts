@@ -1,3 +1,8 @@
+@Suppress("DSL_SCOPE_VIOLATION")
+plugins {
+    alias(libs.plugins.jvm) apply false
+}
+
 subprojects {
 
     group = "com.yunkuangao"

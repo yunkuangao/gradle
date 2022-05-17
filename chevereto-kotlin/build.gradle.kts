@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.jvm)
+    id(libs.plugins.jvm.get().pluginId)
     application
     id("org.beryx.runtime") version "1.12.7"
 }

@@ -2,7 +2,7 @@ val pluginsDir by extra { file("$buildDir/plugins") }
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.jvm)
+    id(libs.plugins.jvm.get().pluginId)
 }
 
 version = "0.1.0"
