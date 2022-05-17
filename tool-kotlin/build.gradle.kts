@@ -2,6 +2,7 @@
 plugins {
     id(libs.plugins.jvm.get().pluginId)
     `maven-publish`
+    `java-library`
 }
 
 version = "0.1.1"
