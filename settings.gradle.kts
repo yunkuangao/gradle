@@ -66,6 +66,7 @@ dependencyResolutionManagement {
             alias("jvm").toPluginId("org.jetbrains.kotlin.jvm").versionRef("kotlin")
             alias("plugin-serialization").toPluginId("org.jetbrains.kotlin.plugin.serialization").versionRef("kotlin")
             alias("ksp").toPluginId("com.google.devtools.ksp").versionRef("ksp")
+            alias("dokka").toPluginId("org.jetbrains.dokka").versionRef("kotlin")
 
             // dependency
             alias("kotlin-reflect").to("org.jetbrains.kotlin", "kotlin-reflect").versionRef("kotlin")
