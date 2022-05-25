@@ -10,32 +10,32 @@ import java.util.function.Function
  * ## example:
  * ``` kotlin
  * List<Pojo> dataList = new ArrayList() {{
- * add(new Pojo() {{
- * setDate(new Date());
- * setValue("1");
- * }});
- * add(new Pojo() {{
- * setDate(Date.from(Instant.now().minusSeconds(3600 * 24 * 1)));
- * setValue("2");
- * }});
- * add(new Pojo() {{
- * setDate(Date.from(Instant.now().minusSeconds(3600 * 24 * 1)));
- * setValue("3");
- * }});
- * add(new Pojo() {{
- * setDate(Date.from(Instant.now().minusSeconds(3600 * 24 * 2)));
- * setValue("3");
- * }});
+ *     add(new Pojo() {{
+ *         setDate(new Date());
+ *         setValue("1");
+ *     }});
+ *     add(new Pojo() {{
+ *         setDate(Date.from(Instant.now().minusSeconds(3600 * 24 * 1)));
+ *         setValue("2");
+ *     }});
+ *     add(new Pojo() {{
+ *         setDate(Date.from(Instant.now().minusSeconds(3600 * 24 * 1)));
+ *         setValue("3");
+ *     }});
+ *     add(new Pojo() {{
+ *         setDate(Date.from(Instant.now().minusSeconds(3600 * 24 * 2)));
+ *         setValue("3");
+ *     }});
  * }};
  *
  * Map<String></String>, BigDecimal> result = new TimeLineData.Builder<Pojo>()
- * .dataList(dataList)
- * .k(it -> DateKit.getStr(LocalDateTime.ofInstant(it.getDate().toInstant(), ZoneId.systemDefault()), DateType.MONTH))
- * .v(it -> BigDecimal.valueOf(Double.parseDouble(it.getValue())))
- * .start(LocalDateTime.of(2020, 8, 1, 1, 1))
- * .end(LocalDateTime.of(2021, 8, 1, 1, 1))
- * .build()
- * .getData();
+ *     .dataList(dataList)
+ *     .k(it -> DateKit.getStr(LocalDateTime.ofInstant(it.getDate().toInstant(), ZoneId.systemDefault()), DateType.MONTH))
+ *     .v(it -> BigDecimal.valueOf(Double.parseDouble(it.getValue())))
+ *     .start(LocalDateTime.of(2020, 8, 1, 1, 1))
+ *     .end(LocalDateTime.of(2021, 8, 1, 1, 1))
+ *     .build()
+ *     .getData();
  * ```
  *
  * @author yunkuangao
