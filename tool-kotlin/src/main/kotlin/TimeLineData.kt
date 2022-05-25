@@ -28,7 +28,7 @@ import java.util.function.Function
  *     }});
  * }};
  *
- * Map<String></String>, BigDecimal> result = new TimeLineData.Builder<Pojo>()
+ * Map<String, BigDecimal> result = new TimeLineData.Builder<Pojo>()
  *     .dataList(dataList)
  *     .k(it -> DateKit.getStr(LocalDateTime.ofInstant(it.getDate().toInstant(), ZoneId.systemDefault()), DateType.MONTH))
  *     .v(it -> BigDecimal.valueOf(Double.parseDouble(it.getValue())))
