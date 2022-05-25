@@ -5,10 +5,10 @@ import java.util.function.Function
 
 /**
  *
- * use builder mode build timeline data
+ * # use builder mode build timeline data
  *
- * example:
- * <java>
+ * ## example:
+ * ``` kotlin
  * List<Pojo> dataList = new ArrayList() {{
  * add(new Pojo() {{
  * setDate(new Date());
@@ -36,7 +36,7 @@ import java.util.function.Function
  * .end(LocalDateTime.of(2021, 8, 1, 1, 1))
  * .build()
  * .getData();
-</Pojo></Pojo></java> *
+ * ```
  *
  * @author yunkuangao
  * @apiNote build time-line data
